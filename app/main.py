@@ -1,17 +1,19 @@
 from __future__ import annotations
 
+from typing import Self
+
 
 class Distance:
-    def _init_(self, km: float) -> None:
+    def __init__(self, km: float) -> None:
         self.km: float = km
 
-    def _str_(self) -> str:
+    def __str__(self) -> str:
         return f"Distance: {self.km} kilometers."
 
-    def _repr_(self) -> str:
+    def __repr__(self) -> str:
         return f"Distance(km={self.km})"
 
-    def _add_(
+    def __add__(
         self,
         other: Distance | float
     ) -> Distance:
@@ -19,41 +21,43 @@ class Distance:
             return Distance(self.km + other.km)
         return Distance(self.km + other)
 
-    def _radd_(
+    def __radd__(
         self,
         other: Distance | float
     ) -> Distance:
-        return self._add_(other)
+        return self.__add__(other)
 
-    def _iadd_(
+    def __iadd__(
         self,
         other: Distance | float
-    ) -> Distance:
+    ) -> Self:
         if isinstance(other, Distance):
             self.km += other.km
         else:
             self.km += other
         return self
 
-    def _mul_(
+    def __mul__(
         self,
         other: float
     ) -> Distance:
+        if isinstance(other, Distance):
+            raise TypeError("Distance cannot be multiplied by another Distance")
         return Distance(self.km * other)
 
-    def _rmul_(
+    def __rmul__(
         self,
         other: float
     ) -> Distance:
-        return self._mul_(other)
+        return self.__mul__(other)
 
-    def _truediv_(
+    def __truediv__(
         self,
         other: float
     ) -> Distance:
         return Distance(round(self.km / other, 2))
 
-    def _lt_(
+    def __lt__(
         self,
         other: Distance | float
     ) -> bool:
@@ -61,7 +65,7 @@ class Distance:
             return self.km < other.km
         return self.km < other
 
-    def _gt_(
+    def __gt__(
         self,
         other: Distance | float
     ) -> bool:
@@ -69,7 +73,7 @@ class Distance:
             return self.km > other.km
         return self.km > other
 
-    def _eq_(
+    def __eq__(
         self,
         other: Distance | float
     ) -> bool:
@@ -77,7 +81,7 @@ class Distance:
             return self.km == other.km
         return self.km == other
 
-    def _le_(
+    def __le__(
         self,
         other: Distance | float
     ) -> bool:
@@ -85,7 +89,7 @@ class Distance:
             return self.km <= other.km
         return self.km <= other
 
-    def _ge_(
+    def __ge__(
         self,
         other: Distance | float
     ) -> bool:
