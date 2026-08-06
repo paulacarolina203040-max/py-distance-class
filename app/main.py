@@ -32,13 +32,11 @@ class Distance:
         self.km = result.km
         return self
 
-    def __mul__(
-        self,
-        other: float
-    ) -> Distance:
+    def __mul__(self, other: float) -> Distance:
         if isinstance(other, Distance):
-            raise TypeError("Distance cannot be multiplied by another Distance"
-            )
+            raise TypeError(
+                "Distance cannot be multiplied by another Distance"
+                            )
         return Distance(self.km * other)
 
     def __rmul__(
