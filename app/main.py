@@ -36,7 +36,7 @@ class Distance:
         if isinstance(other, Distance):
             raise TypeError(
                 "Distance cannot be multiplied by another Distance"
-                            )
+            )
         return Distance(self.km * other)
 
     def __rmul__(
